@@ -1,0 +1,100 @@
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper teal">
+      <a href="#!" class="brand-logo">Logo</a>
+      <a class="right pr-2 pl-2 pointer" (click)="showSearchInput()">
+        <i class="material-icons">search</i>
+      </a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li *ngIf="userNickname.length > 0">
+          <a class="waves-effect waves-light modal-trigger"> {{userNickname}} </a>
+        </li>
+        <li>
+          <a class="waves-effect waves-light sidenav-close" routerLink="/expert">expert</a>
+          <a class="waves-effect waves-light sidenav-close" routerLink="/user">user</a>
+          <a class="waves-effect waves-light sidenav-close" routerLink="/designer">designer</a>
+          <a class="waves-effect waves-light sidenav-close" routerLink="/video">video</a>
+          <a class="waves-effect waves-light modal-trigger sidenav-close" href="#registerModal">Registrarse</a>
+          <a class="waves-effect waves-light sidenav-close" routerLink="/">Home</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+<div *ngIf="searching">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 input-field">
+          <form (ngSubmit)="onSubmitSearchImages()">
+            <i class="material-icons prefix">search</i>
+            <input id="search-input" type="text" class="validate">
+            <label for="search-input">Search</label>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+<ul class="sidenav" id="mobile-demo">
+  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/">Home</a></li>
+  
+  
+  <li><div class="divider"></div></li>
+  <li><a class="subheader">Sólo si no hay registro</a></li>
+  <li><a class="sidenav-close waves-effect waves-light modal-trigger" href="#registerModal">Registrarse</a></li>    
+  
+  
+  <li><div class="divider"></div></li>
+  <li><a class="subheader">Sólo si se logeo</a></li>
+  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/expert">My profile</a></li>
+  
+  
+  <li><div class="divider"></div></li>
+  <li><a class="subheader">No reales Sólo son de muestra</a></li>
+  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/video">video</a></li>
+  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/expert">expert</a></li>
+  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/user">user</a></li>
+  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/designer">designer</a></li>
+</ul>
+
+
+
+
+<div id="registerModal" class="modal">
+  <div class="modal-content">
+    <form class="">
+
+      <div class="row">
+        <form (ngSubmit)="setNickname()"></form>
+        <div class="input-field col s12">
+          <select class="icons">
+            <option value="" disabled selected>Choose your role</option>
+            <option value="User" data-icon="./assets/images/user-cover.jpeg" class="left">User</option>
+            <option value="Expert" data-icon="./assets/images/expert-cover.jpeg" class="left">Expert</option>
+            <option value="Designer" data-icon="./assets/images/designer-cover.jpeg" class="left">Content designer</option>
+          </select>
+          <label>What's your role</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="Nickname" type="text" class="validate" name="userNickname" [(ngModel)]="userNickname">
+          <label for="Nickname">Nickname</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="first_name" type="text" class="validate">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s12 m6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Last Name</label>
+        </div>
+
+      </div>
+      <button type="submit" class="modal-close waves-effect waves-green btn teal darken-1">Register</button>
+    </form>
+  </div>
+</div>
