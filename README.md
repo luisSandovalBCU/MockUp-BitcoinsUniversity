@@ -1,5 +1,21 @@
 # BCUMockupNg5
 
+##Pasos para entender el proyecto.
+
+En la caropeta (   src/app/services/   )  encontrán 
+
+1. contract-one.json : el cual contiene el ABI del contracto en solidity.
+2. smart-contract.service.ts : que es donde se encuentran la conexión de Web3.js y la aplicación.
+
+
+
+
+Para los curiosos
+3. smart-contract.service.spec.ts : es un archivo de angular para hacer pruebas 
+
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
 ## Development server
