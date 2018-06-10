@@ -36,10 +36,14 @@ export class SmartContractService {
       // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
       this.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
     }
+
+    this._tokenContract = this.web3.eth.contract(this.tokenABI).at(this._tokenContractAddress);
+
   }
 
+
   printRandomInfo() {
-    console.log(this.web3)
+    console.log(this.web3 )
   }
 
 
