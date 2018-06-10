@@ -1,7 +1,7 @@
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper teal">
-      <a href="#!" class="brand-logo">Logo</a>
+      <a href="#!" class="brand-logo">{{ account }}</a>
       <a class="right pr-2 pl-2 pointer" (click)="showSearchInput()">
         <i class="material-icons">search</i>
       </a>
@@ -9,8 +9,11 @@
         <i class="material-icons">menu</i>
       </a>
       <ul class="right hide-on-med-and-down">
+        <li>
+          <a class="waves-effect waves-light modal-trigger"> </a>
+        </li>
         <li *ngIf="userNickname.length > 0">
-          <a class="waves-effect waves-light modal-trigger"> {{userNickname}} </a>
+          <a class="waves-effect waves-light modal-trigger"> {{userNickname}}  {{ getAccountAddress }}</a>
         </li>
         <li>
           <a class="waves-effect waves-light sidenav-close" routerLink="/expert">expert</a>
@@ -27,39 +30,65 @@
 
 
 <div *ngIf="searching">
-    <div class="container">
-      <div class="row">
-        <div class="col s12 input-field">
-          <form (ngSubmit)="onSubmitSearchImages()">
-            <i class="material-icons prefix">search</i>
-            <input id="search-input" type="text" class="validate">
-            <label for="search-input">Search</label>
-          </form>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col s12 input-field">
+        <form (ngSubmit)="onSubmitSearchImages()">
+          <i class="material-icons prefix">search</i>
+          <input type="text" class="validate">
+          <label for="search-input">Search</label>
+        </form>
       </div>
     </div>
+  </div>
 </div>
 
 <ul class="sidenav" id="mobile-demo">
-  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/">Home</a></li>
-  
-  
-  <li><div class="divider"></div></li>
-  <li><a class="subheader">Sólo si no hay registro</a></li>
-  <li><a class="sidenav-close waves-effect waves-light modal-trigger" href="#registerModal">Registrarse</a></li>    
-  
-  
-  <li><div class="divider"></div></li>
-  <li><a class="subheader">Sólo si se logeo</a></li>
-  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/expert">My profile</a></li>
-  
-  
-  <li><div class="divider"></div></li>
-  <li><a class="subheader">No reales Sólo son de muestra</a></li>
-  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/video">video</a></li>
-  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/expert">expert</a></li>
-  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/user">user</a></li>
-  <li><a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/designer">designer</a></li>
+  <li>
+    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/">Home</a>
+  </li>
+
+
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li>
+    <a class="subheader">Sólo si no hay registro</a>
+  </li>
+  <li>
+    <a class="sidenav-close waves-effect waves-light modal-trigger" href="#registerModal">Registrarse</a>
+  </li>
+
+
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li>
+    <a class="subheader">Sólo si se logeo</a>
+  </li>
+  <li>
+    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/expert">My profile</a>
+  </li>
+
+
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li>
+    <a class="subheader">No reales Sólo son de muestra</a>
+  </li>
+  <li>
+    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/video">video</a>
+  </li>
+  <li>
+    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/expert">expert</a>
+  </li>
+  <li>
+    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/user">user</a>
+  </li>
+  <li>
+    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/designer">designer</a>
+  </li>
 </ul>
 
 
