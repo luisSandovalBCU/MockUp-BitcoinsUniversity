@@ -7,6 +7,8 @@ En la caropeta (   src/app/services/   )  encontrán
 1. contract-one.json : el cual contiene el ABI del contracto en solidity.
 2. smart-contract.service.ts : que es donde se encuentran la conexión de Web3.js y la aplicación.
 
+Este archivo aún no tiene cambios grandes, osea que aún se puede moldear a otros proyectos
+
 
 
 
