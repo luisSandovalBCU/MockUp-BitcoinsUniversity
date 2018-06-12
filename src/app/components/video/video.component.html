@@ -1,10 +1,9 @@
 <!-- ***************************************** -->
 <!-- Video en vista de telefonos moviles -->
-<div class="video-container hide-on-med-and-up">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/b5dhq3dSG2k" frameborder="0" allow="autoplay; encrypted-media"
-    allowfullscreen></iframe>
-</div>
 
+<video class="responsive-video hide-on-med-and-up" controls>
+    <source src="./assets/videos/BC-Video.mp4" type="video/mp4">
+</video>
 
 <!-- ***************************************** -->
 <!-- Vista en escritorio -->
@@ -13,10 +12,9 @@
     <div class="col s12 m8">
 
       <!-- Video en la vsita de escritorio -->
-      <div class="video-container hide-on-small-only">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/b5dhq3dSG2k" frameborder="0" allow="autoplay; encrypted-media"
-          allowfullscreen></iframe>
-      </div>
+      <video class="responsive-video hide-on-small-only" controls>
+          <source src="./assets/videos/BC-Video.mp4" type="video/mp4">
+      </video>
 
       <ul class="collapsible">
 
@@ -64,8 +62,23 @@
       </ul>
 
 
-
+      <!-- ***************************************** -->
+      <!-- Pagar video -->
+      <p>Costo: {{ VideoPriceToSell }}</p>
+      <div class="input-field col s12 m8">
+        <form (ngSubmit)="payVideo()">
+          <i class="material-icons prefix">monetization_on</i>
+          <input id="icon_prefix" type="text" class="validate" [(ngModel)]="videoPrice" name="videoPrice">
+          <label for="icon_prefix">Set Video Price</label>
+        </form>
+      </div>
     </div>
+
+
+
+
+
+
 
     <!-- ***************************************** -->
     <!-- Comentarios -->

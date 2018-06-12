@@ -1,14 +1,14 @@
 [
 	{
 		"constant": false,
-		"inputs": [],
-		"name": "getNum",
-		"outputs": [
+		"inputs": [
 			{
 				"name": "n",
 				"type": "uint256"
 			}
 		],
+		"name": "setNum",
+		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -17,11 +17,11 @@
 		"constant": false,
 		"inputs": [
 			{
-				"name": "n",
-				"type": "uint256"
+				"name": "nombre",
+				"type": "string"
 			}
 		],
-		"name": "setNum",
+		"name": "setUserName",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -36,11 +36,25 @@
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "num",
+		"name": "getNum",
 		"outputs": [
 			{
-				"name": "",
+				"name": "n",
 				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getUserName",
+		"outputs": [
+			{
+				"name": "nombre",
+				"type": "string"
 			}
 		],
 		"payable": false,

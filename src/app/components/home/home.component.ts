@@ -11,7 +11,6 @@ export class HomeComponent implements OnInit {
   constructor( public contractOne : SmartContractService) { }
 
   ngOnInit() {
-    this.contractOne.printRandomInfo();
   }
 
 }
