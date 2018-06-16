@@ -1,13 +1,60 @@
 [
 	{
-		"constant": false,
+		"anonymous": false,
 		"inputs": [
 			{
-				"name": "n",
+				"indexed": false,
+				"name": "uRole",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"name": "uName",
+				"type": "bytes16"
+			}
+		],
+		"name": "NewUser",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "aHash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "aDescription",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "aPriceInTokens",
 				"type": "uint256"
 			}
 		],
-		"name": "setNum",
+		"name": "NewAsset",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_aHash",
+				"type": "bytes32"
+			},
+			{
+				"name": "_aDescription",
+				"type": "bytes32"
+			},
+			{
+				"name": "_aPriceInTokens",
+				"type": "uint256"
+			}
+		],
+		"name": "setAsset",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -17,11 +64,15 @@
 		"constant": false,
 		"inputs": [
 			{
-				"name": "nombre",
-				"type": "string"
+				"name": "_role",
+				"type": "uint8"
+			},
+			{
+				"name": "_name",
+				"type": "bytes16"
 			}
 		],
-		"name": "setUserName",
+		"name": "setUser",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -29,17 +80,30 @@
 	},
 	{
 		"inputs": [],
-		"payable": true,
-		"stateMutability": "payable",
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
 	{
 		"constant": true,
-		"inputs": [],
-		"name": "getNum",
+		"inputs": [
+			{
+				"name": "_aHash",
+				"type": "bytes32"
+			}
+		],
+		"name": "watchAsset",
 		"outputs": [
 			{
-				"name": "n",
+				"name": "",
+				"type": "bytes32"
+			},
+			{
+				"name": "",
+				"type": "bytes32"
+			},
+			{
+				"name": "",
 				"type": "uint256"
 			}
 		],
@@ -50,11 +114,23 @@
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "getUserName",
+		"name": "watchUser",
 		"outputs": [
 			{
-				"name": "nombre",
-				"type": "string"
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "bytes16"
 			}
 		],
 		"payable": false,

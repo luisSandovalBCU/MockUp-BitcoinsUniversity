@@ -7,8 +7,7 @@ import { DesignerComponent } from './components/designer/designer.component'
 import { HomeComponent } from './components/home/home.component'
 import { VideoComponent } from './components/video/video.component'
 import { VideoSearchComponent } from './components/video-search/video-search.component'
-
-
+import { RegisterComponent } from './components/register/register.component'
 
 const routes: Routes = [
   {path: 'user', component: UserComponent},
@@ -16,6 +15,7 @@ const routes: Routes = [
   {path: 'designer', component: DesignerComponent},
   {path: 'video', component:VideoComponent },
   {path: 'videoSearch', component: VideoSearchComponent},
+  {path: 'register', component: RegisterComponent},
   {path: '', component: HomeComponent },
   {path: '**', component: HomeComponent}
 ];

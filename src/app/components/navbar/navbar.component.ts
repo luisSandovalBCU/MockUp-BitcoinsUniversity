@@ -10,7 +10,7 @@ declare var M: any;
 
 export class NavbarComponent implements OnInit {
 
-  constructor(private router: Router, private contractServices: SmartContractService, ) {
+  constructor(private router: Router, private contractServices: SmartContractService ) {
   }
   userAccountAddress: any = "Algo";
   showRegisterForm: boolean = false;

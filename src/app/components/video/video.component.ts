@@ -22,9 +22,9 @@ export class VideoComponent implements OnInit {
     var instances = M.Collapsible.init(collapsibleElems, collapsibleOptions);
   }
 
-  payVideo(){
-    this.smartContract.setVideoPrice(this.videoPrice)
-  }
+  // payVideo(){
+  //   this.smartContract.setVideoPrice(this.videoPrice)
+  // }
 
 
 }

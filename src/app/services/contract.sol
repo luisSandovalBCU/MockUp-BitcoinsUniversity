@@ -2,11 +2,16 @@ pragma solidity ^0.4.0;
 
 contract Prueba{
     constructor() public payable{}
-    uint private  num;
+
+    uint public num;
     string private userName;
+
+    function pagarVideo() payable public{
+
+    }
     
     function setNum(uint n) public {
-        num=n;
+        num = n;
     }
     function getNum() public view returns (uint n) {
         return num;

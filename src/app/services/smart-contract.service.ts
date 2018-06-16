@@ -12,7 +12,7 @@ export class SmartContractService {
   public userAccountAddress: Promise<string> = null;
 
   private web3: any;
-  private _tokenContractAddress = '0xb4551e3302a379cbd7272bcf6ad4ee10834b05a1';
+  private _tokenContractAddress = '0x3823ffe632bb987a4c241be6d3e27da5bf45f329';
   private instance: any;
 
   constructor() {
@@ -61,15 +61,56 @@ export class SmartContractService {
     return Promise.resolve(this.userAccountAddress);  
   }
 
-  setVideoPrice(price : number ){
-    // alert(`El precio es ${price}`)
-    this.instance.setNum(this.web3.toWei(price, 'ether'), (err, res) =>{
-      if(!err){
-        console.log(`Si sale parce, salí re bien: ${res}`);
-      }else{
-        alert('Ocurrió un error x(  .')
+  // setVideoPrice(price : number ){
+  //   // alert(`El precio es ${price}`)
+  //   this.instance.setNum(this.web3.toWei(price, 'ether'), (err, res) =>{
+  //     if(!err){
+  //       console.log(`Si sale parce, salí re bien: ${res}`);
+  //     }else{
+  //       alert('Ocurrió un error x(  .')
+  //     }
+  //   });
+  // }
+
+
+  setUser(Role: number, Name: string){
+    alert(`Se registra: ${Name} con rol ${Role}`)
+    this.instance.setUser(Role, Name, (err, res) =>{
+      if(!err) {
+        alert(res);
+      } else {
+        alert(err);
       }
-    });
+    })
   }
+
+  /*var NewUserEvent = Videonizer.NewUser();
+
+NewUserEvent.watch(function (error, result) {
+if (!error) {
+$("#loader").hide();
+$("#instructor").html(result.args.uRole);
+} else {
+$("#loader").hide();
+console.log(error);
+}
+});
+
+$("#AddUser").click(function () {
+alert("Add User Button Reached")
+$("#loader").show();
+Videonizer.setUser(1,(err,res)=>{
+if(!err) {
+alert(res);
+}
+else {
+alert(err);
+}
+});
+console.log("Add User Button Reached");
+}); 
+
+*/
+
 }
 

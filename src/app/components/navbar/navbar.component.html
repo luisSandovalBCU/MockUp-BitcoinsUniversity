@@ -20,7 +20,7 @@
           <a class="waves-effect waves-light sidenav-close" routerLink="/user">user</a>
           <a class="waves-effect waves-light sidenav-close" routerLink="/designer">designer</a>
           <a class="waves-effect waves-light sidenav-close" routerLink="/video">video</a>
-          <a class="waves-effect waves-light modal-trigger sidenav-close" href="#registerModal">Registrarse</a>
+          <a class="waves-effect waves-light sidenav-close" routerLink="/register">Registrarse</a>
           <a class="waves-effect waves-light sidenav-close" routerLink="/">Home</a>
         </li>
       </ul>
@@ -58,7 +58,7 @@
     <a class="subheader">Sólo si no hay registro</a>
   </li>
   <li>
-    <a class="sidenav-close waves-effect waves-light modal-trigger" href="#registerModal">Registrarse</a>
+      <a class="waves-effect waves-light sidenav-close" routerLink="/register">Registrarse</a>
   </li>
 
 
@@ -92,36 +92,3 @@
     <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/designer">designer</a>
   </li>
 </ul>
-
-
-<!-- **************************** -->
-<!-- MODAL DE REGISTRO DE USUARIO -->
-<div id="registerModal" class="modal">
-  <div class="modal-content">
-    <form class="">
-
-      <div class="row">
-
-        <form (ngSubmit)="setNickname()"></form>
-        <span>You're registering with address <br> {{ userAccountAddress }} </span>
-        <div class="input-field col s12">
-          <select class="icons">
-            <option value="no-selection" disabled selected>Choose your role</option>
-            <option value="User" data-icon="./assets/images/user-cover.jpeg" class="left">User</option>
-            <option value="Expert" data-icon="./assets/images/expert-cover.jpeg" class="left">Expert</option>
-            <option value="Designer" data-icon="./assets/images/designer-cover.jpeg" class="left">Content designer</option>
-          </select>
-          <label>What's your role</label>
-        </div>
-        
-        <div class="input-field col s12">
-          <input id="Nickname" type="text" class="validate" name="userNickname" [(ngModel)]="userNickname">
-          <label for="Nickname">Nombre</label>
-        </div>
-
-      </div>
-      
-      <button type="submit" class="modal-close waves-effect waves-green btn teal darken-1">Register</button>
-    </form>
-  </div>
-</div>

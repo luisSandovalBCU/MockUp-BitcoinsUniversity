@@ -35,3 +35,29 @@
 [debug] [2018-06-12T04:49:17.350Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/mockups-e88f2/uploads/-LEmXfPjKeIXEqEYMS1y?fileCount=15&message=  
   
  Tue Jun 12 2018 00:49:17 GMT-0400 (Eastern Daylight Time)
+[debug] [2018-06-12T04:53:09.225Z] ----------------------------------------------------------------------
+[debug] [2018-06-12T04:53:09.228Z] Command:       /home/luis/.nvm/versions/node/v10.4.0/bin/node /home/luis/.nvm/versions/node/v10.4.0/bin/firebase deploy
+[debug] [2018-06-12T04:53:09.228Z] CLI Version:   3.18.6
+[debug] [2018-06-12T04:53:09.228Z] Platform:      linux
+[debug] [2018-06-12T04:53:09.228Z] Node Version:  v10.4.0
+[debug] [2018-06-12T04:53:09.238Z] Time:          Tue Jun 12 2018 00:53:09 GMT-0400 (Eastern Daylight Time)
+[debug] [2018-06-12T04:53:09.238Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-06-12T04:53:09.249Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-06-12T04:53:09.250Z] > authorizing via signed-in user
+[debug] [2018-06-12T04:53:09.252Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/mockups-e88f2  
+  
+ Tue Jun 12 2018 00:53:09 GMT-0400 (Eastern Daylight Time)
+[debug] [2018-06-12T04:53:09.988Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-12T04:53:09.989Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/mockups-e88f2/tokens  
+  
+ Tue Jun 12 2018 00:53:09 GMT-0400 (Eastern Daylight Time)
+[debug] [2018-06-12T04:53:10.540Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'mockups-e88f2'...
+[info] 
+[info] i  deploying hosting
+[info] i  hosting: preparing public-live directory for upload...
+[debug] [2018-06-12T04:53:12.354Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/mockups-e88f2/uploads/-LEmYZnxKq5kS2uTrpy0?fileCount=15&message=  
+  
+ Tue Jun 12 2018 00:53:12 GMT-0400 (Eastern Daylight Time)
