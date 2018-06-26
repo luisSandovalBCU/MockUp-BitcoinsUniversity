@@ -2,7 +2,7 @@
 <!-- Video en vista de telefonos moviles -->
 
 <video class="responsive-video hide-on-med-and-up" controls>
-    <source src="./assets/videos/BC-Video.mp4" type="video/mp4">
+  <source src="./assets/videos/BC-Video.mp4" type="video/mp4">
 </video>
 
 <!-- ***************************************** -->
@@ -11,9 +11,9 @@
   <div class="row">
     <div class="col s12 m8">
 
-      <!-- Video en la vsita de escritorio -->
+      <!-- Video en la vista de escritorio -->
       <video class="responsive-video hide-on-small-only" controls>
-          <source src="./assets/videos/BC-Video.mp4" type="video/mp4">
+        <source src="./assets/videos/BC-Video.mp4" type="video/mp4">
       </video>
 
       <ul class="collapsible">
@@ -21,7 +21,7 @@
         <li>
           <div class="collapsible-header valign-wrapper">
 
-            <span class="f-size-20"> Blockchain para matemáticos </span>
+            <span class="f-size-20">Resumen Blockchain</span>
             <span class="badge">
               <i class="material-icons right">arrow_drop_down_circle</i>
             </span>
@@ -31,7 +31,7 @@
             <div class="card no-pad no-mar">
               <div class="card-content black-text">
 
-                <p>Si tienes un background en matemáticas podrás entender mejor qué es blockchain viendo este vídeo.</p>
+                <p>Este video es una peque;a explicacion de lo que es blockchain.</p>
               </div>
               <div class="card-action">
                 <div class="row">
@@ -64,14 +64,14 @@
 
       <!-- ***************************************** -->
       <!-- Pagar video -->
-      <p>Costo: {{ VideoPriceToSell }}</p>
-      <div class="input-field col s12 m8">
-        <!-- <form>
+      
+      <!--<div class="input-field col s12 m8">
+         <form>
           <i class="material-icons prefix">monetization_on</i>
           <input id="icon_prefix" type="text" class="validate" [(ngModel)]="videoPrice" name="videoPrice">
           <label for="icon_prefix">Set Video Price</label>
-        </form> -->
-      </div>
+        </form> 
+      </div>-->
     </div>
 
 
@@ -82,9 +82,9 @@
 
     <!-- ***************************************** -->
     <!-- Comentarios -->
-    <div class="col s12 m4">
+    <div class="col s12 m4" *ngIf="showPrice" >
 
-      <ul class="collapsible">
+      <!-- <ul class="collapsible">
 
         <li class="active">
           <div class="collapsible-header">
@@ -114,9 +114,23 @@
             </div>
           </div>
         </li>
-      </ul>
+      </ul> -->
 
+      <p style="font-size: 30px">Costo: {{ VideoPriceToSell | currency}}</p>
+      <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Comprar</a>
+      
     </div>
 
   </div>
 </div>
+
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Getting awesome content?</h4>
+      <p>Please add your credit card information</p>
+    </div>
+    <div class="modal-footer">
+      <a (click)="removePrice()" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>

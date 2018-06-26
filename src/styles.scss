@@ -37,3 +37,11 @@ $user-tag-radius: 12px;
 .pointer{
     cursor: pointer;
 }
+
+.round-corner-20px{
+    border-radius: 20px !important
+}
+
+.round-corner-top-20px{
+    border-radius: 20px 20px 0px  0px !important;
+}

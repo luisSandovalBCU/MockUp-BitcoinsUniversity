@@ -19,6 +19,7 @@ import { SliderComponent } from './components/home/slider/slider.component';
 import { VideoComponent } from './components/video/video.component';
 import { VideoSearchComponent } from './components/video-search/video-search.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CreateAssetComponent } from './components/create-asset/create-asset.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { RegisterComponent } from './components/register/register.component';
     SliderComponent,
     VideoComponent,
     VideoSearchComponent,
-    RegisterComponent
+    RegisterComponent,
+    CreateAssetComponent
   ],
   imports: [
     BrowserModule,

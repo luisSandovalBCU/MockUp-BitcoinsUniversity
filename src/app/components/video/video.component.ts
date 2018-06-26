@@ -10,7 +10,8 @@ declare var M:any;
 export class VideoComponent implements OnInit {
 
   public videoPrice : number;
-  public VideoPriceToSell : any;
+  public VideoPriceToSell : any = 15.00;
+  public showPrice : boolean = true;
 
   constructor(public smartContract: SmartContractService) { }
 
@@ -20,11 +21,15 @@ export class VideoComponent implements OnInit {
     let collapsibleOptions = new Object();
     var collapsibleElems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(collapsibleElems, collapsibleOptions);
+
+    let modalOptions = new Object();
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, modalOptions);
   }
 
-  // payVideo(){
-  //   this.smartContract.setVideoPrice(this.videoPrice)
-  // }
+  removePrice(){
+    this.showPrice = false;
+  }
 
 
 }
