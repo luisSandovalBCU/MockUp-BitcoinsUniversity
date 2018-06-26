@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SmartContractService } from '../../services/smart-contract.service'
+import { AngularFireDatabase } from 'angularfire2/database';
 
 declare var M: any;
 @Component({
