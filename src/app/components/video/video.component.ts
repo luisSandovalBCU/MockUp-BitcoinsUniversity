@@ -10,7 +10,7 @@ declare var M:any;
 export class VideoComponent implements OnInit {
 
   public videoPrice : number;
-  public VideoPriceToSell : any = 15.00;
+  
   public showPrice : boolean = true;
 
   constructor(public smartContract: SmartContractService) { }
@@ -30,6 +30,7 @@ export class VideoComponent implements OnInit {
   removePrice(){
     this.showPrice = false;
   }
+
 
 
 }

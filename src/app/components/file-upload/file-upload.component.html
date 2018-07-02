@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col s12 m8 offset m2">
+            <h5 class="card-title">Select a file for upload:</h5>
+            <input type="file" (change)="(upload($event))" />
+        </div>
+        <div class="col s12 center">
+
+            <p> {{ uploadProgress | async }} % </p>    
+
+            <div class="progress">
+                <div class="determinate" [style.width]="(uploadProgress | async) + '%'"></div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="profileUrl">
+    <!-- <img [src]="profileUrl" /> -->
+
+    <video controls width="640" height="480">
+        <source [src]="profileUrl" type="video/mp4">
+    </video>
+</div>
+
+

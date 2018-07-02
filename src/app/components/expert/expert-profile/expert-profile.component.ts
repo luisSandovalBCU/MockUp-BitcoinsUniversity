@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 declare var M:any;
 
 
@@ -8,12 +9,19 @@ declare var M:any;
 })
 export class ExpertProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit() {
     let tooltipOptions = new Object();
     var tooltipElems = document.querySelectorAll('.tooltipped');
     var instances = M.Tooltip.init(tooltipElems, tooltipOptions);
+  }
+
+  uploadVideo(){
+    let inputWithVideo = document.getElementById("videoUuploadInput").click();
+    if(inputWithVideo){
+      this.router.navigate(["/createAsset"]);
+    }
   }
 
 }

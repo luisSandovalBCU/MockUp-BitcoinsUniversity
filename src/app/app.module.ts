@@ -4,11 +4,14 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 
 import { SmartContractService  } from './services/smart-contract.service'
+
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { environment } from '../environments/environment';
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
+// import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserComponent } from './components/user/user.component';
@@ -23,6 +26,10 @@ import { VideoComponent } from './components/video/video.component';
 import { VideoSearchComponent } from './components/video-search/video-search.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CreateAssetComponent } from './components/create-asset/create-asset.component';
+import { VideoListComponent } from './components/home/video-list/video-list.component';
+
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+
 
 
 @NgModule({
@@ -40,14 +47,18 @@ import { CreateAssetComponent } from './components/create-asset/create-asset.com
     VideoComponent,
     VideoSearchComponent,
     RegisterComponent,
-    CreateAssetComponent
+    CreateAssetComponent,
+    VideoListComponent,
+    
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule
+    AngularFireStorageModule,
+    
   ],
   providers: [
     SmartContractService

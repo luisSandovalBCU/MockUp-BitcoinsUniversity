@@ -4,6 +4,126 @@
 		"inputs": [
 			{
 				"indexed": false,
+				"name": "aHash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "uAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "expertPercentage",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "expertTransfer",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "userPercentage",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "userTransfer",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "ownerPercentage",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "ownerTransfer",
+				"type": "uint256"
+			}
+		],
+		"name": "NewSale",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "Payable",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "aHash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "dPrice",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "expertAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "expertPercentage",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "userAddress",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "userPercentage",
+				"type": "uint256"
+			}
+		],
+		"name": "NewDeal",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "aHash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "aType",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "aName",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "aPrice",
+				"type": "uint256"
+			}
+		],
+		"name": "NewAsset",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
 				"name": "uRole",
 				"type": "uint8"
 			},
@@ -17,26 +137,30 @@
 		"type": "event"
 	},
 	{
-		"anonymous": false,
+		"constant": false,
 		"inputs": [
 			{
-				"indexed": false,
-				"name": "aHash",
+				"name": "_aHash",
 				"type": "bytes32"
 			},
 			{
-				"indexed": false,
-				"name": "aDescription",
+				"name": "_aType",
 				"type": "bytes32"
 			},
 			{
-				"indexed": false,
-				"name": "aPriceInTokens",
+				"name": "_aName",
+				"type": "bytes32"
+			},
+			{
+				"name": "_aPrice",
 				"type": "uint256"
 			}
 		],
-		"name": "NewAsset",
-		"type": "event"
+		"name": "setAsset",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"constant": false,
@@ -46,18 +170,44 @@
 				"type": "bytes32"
 			},
 			{
-				"name": "_aDescription",
-				"type": "bytes32"
+				"name": "_dPrice",
+				"type": "uint256"
 			},
 			{
-				"name": "_aPriceInTokens",
+				"name": "_expertAddress",
+				"type": "address"
+			},
+			{
+				"name": "_expertPercentage",
+				"type": "uint256"
+			},
+			{
+				"name": "_userAddress",
+				"type": "address"
+			},
+			{
+				"name": "_userPercentage",
 				"type": "uint256"
 			}
 		],
-		"name": "setAsset",
+		"name": "setDeal",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_aHash",
+				"type": "bytes32"
+			}
+		],
+		"name": "setSale",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -101,6 +251,49 @@
 			{
 				"name": "",
 				"type": "bytes32"
+			},
+			{
+				"name": "",
+				"type": "bytes32"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_aHash",
+				"type": "bytes32"
+			}
+		],
+		"name": "watchDeal",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "address"
 			},
 			{
 				"name": "",

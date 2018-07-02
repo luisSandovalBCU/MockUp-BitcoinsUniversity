@@ -5,22 +5,25 @@
           <span>You're registering with address
             <br> {{ userAccountAddress }} </span> <br>
           <div class="input-field col s12">
-            <select class="icons" name="Role" [(ngModel)]="Role">
+            <select class="icons" name="Role" [(ngModel)]="user.role">
               <option value="no-selection" disabled selected>Choose your role</option>
               <option value="0" data-icon="./assets/images/user-cover.jpeg" class="left">User</option>
               <option value="1" data-icon="./assets/images/expert-cover.jpeg" class="left">Expert</option>
-              <option value="2" data-icon="./assets/images/designer-cover.jpeg" class="left">Content designer</option>
             </select>
             <label>What's your role</label>
           </div>
       
           <div class="input-field col s12">
-            <input id="Nombre" type="text" class="validate" name="Nombre" [(ngModel)]="Nombre">
+            <input id="Nombre" type="text" class="validate" name="Nombre" [(ngModel)]="user.name">
             <label for="Nombre">Nombre</label>
           </div>
           <div class="input-field col s12">
-            <input id="Apellido" type="text" class="validate" name="Apellido" [(ngModel)]="Apellido">
+            <input id="Apellido" type="text" class="validate" name="Apellido" [(ngModel)]="user.lastname">
             <label for="Apellido">Apellido</label>
+          </div>    
+          <div class="input-field col s12">
+            <input id="email" type="text" class="validate" name="Apellido" [(ngModel)]="user.email">
+            <label for="email">Correo Electronico</label>
           </div>    
       
           <div class="input-field col s12 center">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SmartContractService } from '../../services/smart-contract.service'
+import { SmartContractService } from '../../services/smart-contract.service';
+import { User } from '../../models/user'
 
 declare let require: any;
 var sha256 = require('js-sha256').sha256;
@@ -15,6 +16,14 @@ export class RegisterComponent implements OnInit {
   Nombre: string;
   Apellido: string;
   Role: number;
+  user : User = {
+    id: '',
+    name: '',
+    role: null,
+    address: '',
+    email:''
+  }
+
 
   constructor(private contractServices: SmartContractService) { }
 
@@ -33,8 +42,8 @@ export class RegisterComponent implements OnInit {
   }
 
   sendRegistrationData(){
-    let FullName  = this.Nombre +' '+ this.Apellido 
-    this.contractServices.setUser(this.Role, FullName); 
+    let FullName  = this.user.name +' '+ this.user.lastname 
+    this.contractServices.setUser(this.user.role, FullName); 
   }
 
 }

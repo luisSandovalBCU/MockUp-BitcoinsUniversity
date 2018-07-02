@@ -45,3 +45,35 @@ $user-tag-radius: 12px;
 .round-corner-top-20px{
     border-radius: 20px 20px 0px  0px !important;
 }
+
+.dropzone{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 200;
+    height: 300px;
+    border: 2px solid #f16624;
+    border-radius: 5px;
+    background: #ccc;
+    margin: 10px 0;
+
+    &.hovering{
+        border: 2px solid #f16624;
+        color: #dadada !important;
+    }
+
+    .file-label{
+        font-size: 1.2rem;
+    }
+}
+
+
+.img-uploaded {
+    width: 250px;
+}
+
+
+progress::webkit-progressive-value{
+    transition: width 0.1s ease;
+}
