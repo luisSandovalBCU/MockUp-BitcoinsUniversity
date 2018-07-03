@@ -6,20 +6,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 
-import { SmartContractService  } from './services/smart-contract.service'
+import { SmartContractService  } from './services/smart-contract.service';
+
+import { FirebaseService } from './services/firebase.service'
 
 import { AngularFireModule } from 'angularfire2';
 // import { AngularFireDatabaseModule } from 'angularfire2/database';
-// import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { UserComponent } from './components/user/user.component';
-import { ExpertComponent } from './components/expert/expert.component';
-import { ExpertProfileComponent } from './components/expert/expert-profile/expert-profile.component';
-import { DesignerComponent } from './components/designer/designer.component';
-import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
-import { DesignerProfileComponent } from './components/designer/designer-profile/designer-profile.component';
+import { UserComponent } from './components/profile/user.component';
+
+
+
+import { UserProfileComponent } from './components/profile/user-profile/user-profile.component';
+
 import { HomeComponent } from './components/home/home.component';
 import { SliderComponent } from './components/home/slider/slider.component';
 import { VideoComponent } from './components/video/video.component';
@@ -27,8 +29,8 @@ import { VideoSearchComponent } from './components/video-search/video-search.com
 import { RegisterComponent } from './components/register/register.component';
 import { CreateAssetComponent } from './components/create-asset/create-asset.component';
 import { VideoListComponent } from './components/home/video-list/video-list.component';
-
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { TruncateEthereumAddressPipe } from './custompipes/truncate-ethereum-address.pipe';
 
 
 
@@ -37,11 +39,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     AppComponent,
     NavbarComponent,
     UserComponent,
-    ExpertComponent,
-    ExpertProfileComponent,
-    DesignerComponent,
     UserProfileComponent,
-    DesignerProfileComponent,
     HomeComponent,
     SliderComponent,
     VideoComponent,
@@ -50,7 +48,9 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     CreateAssetComponent,
     VideoListComponent,
     
-    FileUploadComponent
+    FileUploadComponent,
+    
+    TruncateEthereumAddressPipe
   ],
   imports: [
     BrowserModule,
@@ -58,10 +58,12 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
+    AngularFirestoreModule
     
   ],
   providers: [
-    SmartContractService
+    SmartContractService,
+    FirebaseService
   ],
   bootstrap: [AppComponent]
 })

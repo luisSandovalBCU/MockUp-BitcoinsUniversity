@@ -1,0 +1,71 @@
+<!-- Cover Image selected by the user  -->
+<div class="parallax-container">
+  <div class="parallax">
+    <!-- <img [src]="userPic.coverPicture"> -->
+      
+      <img alt="" id="parallaxUserCover">
+  </div>
+</div>
+
+<!-- User Information -->
+<div *ngIf="userInfo">
+  <div class="container up-480" *ngFor="let user of userInfo">
+    <div class="row">
+
+
+      <div class="col s6 offset-s3 m3 offset-m9 l2 offset-l10 indigo user-tag" *ngIf="user.role == 0" style="text-align: center">
+        <span class="white-text valign-wrapper" style="font-size: 25px">
+          <i class="material-icons" style="font-size: 30px">show_chart</i>
+          <span class=""> User</span>
+        </span>
+      </div>
+
+      <div class="col s6 offset-s3 m3 offset-m9 l2 offset-l10 blue-grey darken-4 user-tag" *ngIf="user.role == 1" style="text-align: center">
+        <span class="white-text valign-wrapper" style="font-size: 25px">
+          <i class="material-icons" style="font-size: 30px">stars</i>
+          <span class=""> Expert</span>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col s12 m6 center">
+        <!-- <img src="./assets/images/user-photo.jpg" alt="" class="circle" width="250"> -->
+        <img [src]="user.profilePicture" alt="" class="circle" width="250">
+      </div>
+      <div class="col s12 m6">
+        <div class="card">
+          <ul class="collection">
+            <li class="collection-item avatar">
+              <i class="material-icons circle">person</i>
+              <span class="title">Name</span>
+              <p class="truncate"> {{ user.name }} {{ user.lastname }} </p>
+              <a href="#!" class="secondary-content">
+                <i class="material-icons">grade</i>
+              </a>
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons circle green">email</i>
+              <span class="title">Name</span>
+              <p class="truncate"> {{ user.email }} </p>
+              <a href="#!" class="secondary-content">
+                <i class="material-icons">grade</i>
+              </a>
+            </li>
+            <li class="collection-item avatar">
+              <i class="material-icons circle red">cloud_upload</i>
+              <a routerLink="/videoUpload">
+                <span class="title">Upload a video</span>
+              </a>
+
+              <a href="#!" class="secondary-content">
+                <i class="material-icons">grade</i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

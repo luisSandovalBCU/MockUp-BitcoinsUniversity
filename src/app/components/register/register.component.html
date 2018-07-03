@@ -5,30 +5,40 @@
           <span>You're registering with address
             <br> {{ userAccountAddress }} </span> <br>
           <div class="input-field col s12">
-            <select class="icons" name="Role" [(ngModel)]="user.role">
+            <select class="icons" name="role" [(ngModel)]="userInfo.role" required>
               <option value="no-selection" disabled selected>Choose your role</option>
               <option value="0" data-icon="./assets/images/user-cover.jpeg" class="left">User</option>
               <option value="1" data-icon="./assets/images/expert-cover.jpeg" class="left">Expert</option>
             </select>
             <label>What's your role</label>
           </div>
-      
+          
+          
+          <input type="hidden" id="userEthereumAdddess" [(ngModel)]="userInfo.address" name="address" [value]="userAccountAddress" required>
+          
+          
           <div class="input-field col s12">
-            <input id="Nombre" type="text" class="validate" name="Nombre" [(ngModel)]="user.name">
+            <input id="Nombre" type="text" class="validate" name="nombre" [(ngModel)]="userInfo.name" required>
             <label for="Nombre">Nombre</label>
           </div>
           <div class="input-field col s12">
-            <input id="Apellido" type="text" class="validate" name="Apellido" [(ngModel)]="user.lastname">
+            <input id="Apellido" type="text" class="validate" name="apellido" [(ngModel)]="userInfo.lastname" required>
             <label for="Apellido">Apellido</label>
           </div>    
           <div class="input-field col s12">
-            <input id="email" type="text" class="validate" name="Apellido" [(ngModel)]="user.email">
+            <input id="email" type="text" class="validate" name="email" [(ngModel)]="userInfo.email" required>
             <label for="email">Correo Electronico</label>
           </div>    
       
-          <div class="input-field col s12 center">
+          <div class="input-field col s12 center" *ngIf="registerUser; else noRegistratioAvailabe">
             <button type="submit" class="modal-close waves-effect waves-green btn teal darken-1">Register</button>
           </div>
+
+          <ng-template #noRegistratioAvailabe>
+              <div class="input-field col s12 center">
+                <button type="button" class="modal-close waves-effect waves-green btn teal darken-1">Register</button>
+              </div>
+          </ng-template>
       
           
         </form>

@@ -1,7 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SmartContractService } from '../../services/smart-contract.service'
-import { AngularFireDatabase } from 'angularfire2/database';
+import { SmartContractService } from '../../services/smart-contract.service';
+import { FirebaseService } from '../../services/firebase.service';
+import { User } from '../../models/user';
 
 declare var M: any;
 @Component({
@@ -10,23 +11,63 @@ declare var M: any;
 })
 
 export class NavbarComponent implements OnInit {
-
-  constructor(private router: Router, private contractServices: SmartContractService ) {
+  
+  userInfo: User[];
+  constructor(private router: Router, private contractServices: SmartContractService, private fireService: FirebaseService ) {
   }
-  userAccountAddress: any = "Algo";
+  userAccountAddress: any = "Not reachable";
   showRegisterForm: boolean = false;
   userIsSet: boolean = false;
   userNickname: string = '';
   searching: boolean = false;
 
 
+
   ngOnInit() {
-    if (this.contractServices.crytoUser != false) {
+    ///******************************/
+    ///Solidity
+    if (this.contractServices.cryptoUser != false) {
       this.contractServices.getUserAccount()
         .then(account => {
           this.userAccountAddress =  account;
-        })
+          ///******************************/
+          ///Firebase
+          this.fireService.getUserAddress(account)
+          this.fireService.getUserInfo().subscribe( queriedItems =>{
+            this.userInfo = queriedItems;
+            queriedItems.forEach(info => {
+              if (info['address']) {
+                // this.userAccountAddress = false;
+                this.showRegisterForm = true
+              }
+            })
+            
+          });
+        });
     }
+
+
+    
+
+
+    // if (this.contractServices.cryptoUser != false) {
+          
+    //       ///******************************/
+    //       ///Solidity
+    //       this.contractServices.getUserAccount()
+    //         .then(account => {
+    //           this.userAccountAddress = account;
+    //           ///******************************/
+    //           ///Firebase
+    //           this.fireService.getUserAddress(account)
+
+    //           let alreadyReegistered
+              
+    //         });
+        
+    // }
+
+
 
 
 
@@ -46,15 +87,7 @@ export class NavbarComponent implements OnInit {
     var instances = M.FormSelect.init(selectElems, selectElemsOptions);
   }
 
-  ///******************************/
-  //  Mostrar formulario de registro
-  getRegisterForm() {
-    if (this.showRegisterForm == false) {
-      this.showRegisterForm = true;
-    } else {
-      this.showRegisterForm = false;
-    }
-  }
+
   // Utilizar el nombre del usuario para la vsita
   setNickname() {
     if (this.userNickname.length < 2) {

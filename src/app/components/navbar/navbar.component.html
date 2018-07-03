@@ -10,20 +10,13 @@
       </a>
       <ul class="right hide-on-med-and-down">
         <li>
-          <a class="waves-effect waves-light modal-trigger"> </a>
-        </li>
-        <li *ngIf="userNickname.length > 0">
-          <a class="waves-effect waves-light modal-trigger"> {{userNickname}}  {{ getAccountAddress }}</a>
-        </li>
-        <li>
-          <!-- <a class="waves-effect waves-light sidenav-close" routerLink="/expert">expert</a>
-          <a class="waves-effect waves-light sidenav-close" routerLink="/user">user</a>
-          <a class="waves-effect waves-light sidenav-close" routerLink="/designer">designer</a> -->
-          <!-- <a class="waves-effect waves-light sidenav-close" routerLink="/video">video</a> -->
-          <a class="waves-effect waves-light sidenav-close" routerLink="/register">Registrarse</a>
+          <a *ngIf="showRegisterForm; else noRegisteredUserNavbar"
+          class="waves-effect waves-light sidenav-close" 
+          routerLink="/user">My profile</a>
+          <ng-template #noRegisteredUserNavbar>
+            <a class="waves-effect waves-light sidenav-close" routerLink="/register">Registrarse</a>
+          </ng-template>
           <a class="waves-effect waves-light sidenav-close" routerLink="/">Home</a>
-          <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/expert">My profile</a>
-          
         </li>
       </ul>
     </div>
@@ -47,50 +40,39 @@
 
 
 <!-- MENU EN VISTA MOVIL -->
+
 <ul class="sidenav" id="mobile-demo">
-  <li>
-    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/">Home</a>
+  <li *ngIf="showRegisterForm">
+    <div class="user-view" *ngFor="let user of userInfo">
+      <div class="background">
+        <img [src]="user.coverPicture">
+      </div>
+      <a  routerLink="/user" class="sidenav-close">
+        <img class="circle" [src]="user.profilePicture">
+      </a>
+      <a>
+        <span class="white-text truncate"> {{ user.name }} {{ user.lastname }} </span>
+      </a>
+      <a>
+        <span class="white-text truncate"> {{ user.email }} </span>
+      </a>
+    </div>
   </li>
-
-
+  <li>
+    <a class="waves-effect waves-light sidenav-close" routerLink="/">Home</a>
+  </li>
   <li>
     <div class="divider"></div>
   </li>
-  <li>
-    <a class="subheader">Sólo si no hay registro</a>
+  <li *ngIf="showRegisterForm; else noRegisteredUserNavbar">
+    <a class="waves-effect waves-light sidenav-close" routerLink="/user">My profile</a>
   </li>
-  <li>
+  <ng-template #noRegisteredUserNavbar>
+    <li>
       <a class="waves-effect waves-light sidenav-close" routerLink="/register">Registrarse</a>
-  </li>
-
-
+    </li>
+  </ng-template>
   <li>
     <div class="divider"></div>
   </li>
-  <li>
-    <a class="subheader">Sólo si se logeo</a>
-  </li>
-  <li>
-    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/expert">My profile</a>
-  </li>
-
-<!-- 
-  <li>
-    <div class="divider"></div>
-  </li>
-  <li>
-    <a class="subheader">No reales Sólo son de muestra</a>
-  </li>
-  <li>
-    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/video">video</a>
-  </li>
-  <li>
-    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/expert">expert</a>
-  </li>
-  <li>
-    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/user">user</a>
-  </li>
-  <li>
-    <a class="waves-effect waves-light modal-trigger sidenav-close" routerLink="/designer">designer</a>
-  </li> -->
 </ul>

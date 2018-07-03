@@ -1,9 +1,10 @@
 <!-- ***************************************** -->
 <!-- Video en vista de telefonos moviles -->
-
-<video class="responsive-video hide-on-med-and-up" controls>
-  <source src="./assets/videos/BC-Video.mp4" type="video/mp4">
-</video>
+<div *ngIf="assetSource">
+  <video controls class="responsive-video hide-on-med-and-up">
+    <source [src]="assetSource" type="video/mp4">
+  </video>
+</div>
 
 <!-- ***************************************** -->
 <!-- Vista en escritorio -->
@@ -12,9 +13,11 @@
     <div class="col s12 m8">
 
       <!-- Video en la vista de escritorio -->
-      <video class="responsive-video hide-on-small-only" controls>
-        <source src="./assets/videos/BC-Video.mp4" type="video/mp4">
-      </video>
+      <div *ngIf="assetSource">
+        <video controls class="responsive-video hide-on-small-only">
+          <source [src]="assetSource" type="video/mp4">
+        </video>
+      </div>
 
       <ul class="collapsible">
 
@@ -64,7 +67,7 @@
 
       <!-- ***************************************** -->
       <!-- Pagar video -->
-      
+
       <!--<div class="input-field col s12 m8">
          <form>
           <i class="material-icons prefix">monetization_on</i>
@@ -82,7 +85,7 @@
 
     <!-- ***************************************** -->
     <!-- Comentarios -->
-    <div class="col s12 m4" *ngIf="showPrice" >
+    <div class="col s12 m4" *ngIf="showPrice">
 
       <!-- <ul class="collapsible">
 
@@ -115,7 +118,7 @@
           </div>
         </li>
       </ul> -->
-      
+
     </div>
 
   </div>
@@ -123,11 +126,11 @@
 
 
 <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Getting awesome content?</h4>
-      <p>Please add your credit card information</p>
-    </div>
-    <div class="modal-footer">
-      <a (click)="removePrice()" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-    </div>
+  <div class="modal-content">
+    <h4>Getting awesome content?</h4>
+    <p>Please add your credit card information</p>
   </div>
+  <div class="modal-footer">
+    <a (click)="removePrice()" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>

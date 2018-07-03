@@ -77,3 +77,11 @@ $user-tag-radius: 12px;
 progress::webkit-progressive-value{
     transition: width 0.1s ease;
 }
+
+.setDealSection{
+    min-height:380px; 
+    display: flex; 
+    justify-content: center; 
+    align-items:center;  
+    flex-flow: column
+}

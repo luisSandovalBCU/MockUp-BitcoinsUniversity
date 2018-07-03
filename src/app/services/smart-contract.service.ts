@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-// import { Subject } from 'rxjs/Rx';
+import { Router } from '@angular/router';
+import { FirebaseService } from './firebase.service'
+import { User } from '../models/user';
+
+
 declare let require: any;
 declare let window: any;
 const Web3 = require('web3');
@@ -8,36 +12,40 @@ const tokenABI = require('./contract-one.json');
 @Injectable()
 export class SmartContractService {
   
-  public crytoUser: boolean = false;
+  public cryptoUser: boolean = false;
   public userAccountAddress: Promise<string> = null;
 
   private web3: any;
-  private _tokenContractAddress = '0xa7f67f1cf70528dcd552cdd9527e1308d3adad8c';
+  private _tokenContractAddress = '0x6e0bec7cd4c786919329dc1025c4cf8cf951bbd2';
   private instance: any;
 
-  constructor() {
+  constructor(private router: Router, private fireService : FirebaseService) {
     this.bootstrapWeb3();
   }
 
   public bootstrapWeb3() {
+
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof window.web3 !== 'undefined') {
       // Use Mist/MetaMask's provider
       this.web3 = new Web3(window.web3.currentProvider);
-      this.crytoUser = true
+      this.cryptoUser = true
     } else {
-      this.crytoUser = false;
-      ///////alert('No web3? You should consider trying MetaMask!');
+      this.cryptoUser = false;
+      if(this.router.url != '/'){
+        this.router.navigate(['/']);
+        alert('Haven\'t used ethereum? You should consider trying MetaMask!');
+      }
 
       // // // Hack to provide backwards compatibility for Truffle, which uses web3js 0.20.x
       // // Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
       // // // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
       // // this.web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
     }
-    if (this.crytoUser == true) {
+    if (this.cryptoUser == true) {
       this.instance = this.web3.eth.contract(tokenABI).at(this._tokenContractAddress);
     }
-    console.log(this.instance)
+    // console.log(this.instance)
   }
 
   public async getUserAccount(): Promise<string>  {
@@ -45,13 +53,21 @@ export class SmartContractService {
       this.web3.eth.getAccounts((err, accs) => {
         if(err){
           alert('ocurrió un error al traer la dirección de tu cuenta');
+          this.router.navigate(['/'])
           return;
         }else if(accs.length === 0){
           alert(
-            'Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.'
+            'Couldn\'t get your metamask account.'
           );
+          this.router.navigate(['/'])
           return
         }else{
+          if(this.router.url == '/register'){
+            
+            
+            // this.router.navigate(['/']);
+            // alert('You are already registered');
+          }
           resolve(accs[0])
         }
       })
@@ -61,16 +77,24 @@ export class SmartContractService {
     return Promise.resolve(this.userAccountAddress);  
   }
 
-  setUser(Role: number, Name: string){
-    
-    this.instance.setUser(Role, Name, (err, res) =>{
+  setUser(user: User){
+    let FullName = `${user.name} ${user.lastname}`
+    this.instance.setUser(user.role, FullName, (err, res) =>{
       if(!err) {
-        console.log(` Success with${res}`);
+        console.log(`Success with${res}`);
+        
+        /////Registro en firebase
+        this.fireService.addNewUser(user);
+        
       } else {
-        console.log(` Fail with ${err}`);
+        console.log(`Failed with ${err}`);
       }
     })
   }
 
+
+  watchUsers(){
+    console.log( this.instance.watchUsers());
+  }
 }
 

@@ -1,28 +1,45 @@
-
-import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { User } from '../models/user'
+import { User } from '../models/user';
+import 'rxjs/add/observable/combineLatest';
 
 
 @Injectable()
 export class FirebaseService {
-  usersCollection: AngularFirestoreCollection<User>;
-  users: Observable<User[]>;
-  userDoc: AngularFirestoreDocument<User>;
+  users: Observable<any[]>;
+  UserAddress : string;
 
-  constructor(public afs: AngularFirestore) {
-    // this.items = this.afs.collection('tasks').valueChanges();
-    this.usersCollection = this.afs.collection('Users', ref => ref.orderBy('Name', 'asc'));
 
-    this.users = this.usersCollection.snapshotChanges().pipe(map(changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as User;
-        data.id = a.payload.doc.id;
-        return data;
-      });
-    }));
+  //para agregar un nuevo elemento
+  constructor(public db: AngularFirestore) {
+    db.firestore.settings({ timestampsInSnapshots: true });
   }
 
+  getUserAddress(address: string){
+    this.UserAddress = address;
+    this.getUserInfo();
+  }
+
+  getUserInfo(){
+    if(this.UserAddress){
+      return this.users = this.db.collection('Users',  ref => ref.where('address', '==', this.UserAddress)).valueChanges();
+    }
+  }
+
+
+  addNewUser(user: User){
+    const usersColection = this.db.collection<User>('Users');
+    usersColection.add(user);
+  }
+
+  getSpecificUser(email : string){
+    if(email){
+      return this.users = this.db.collection('Users',  ref => ref.where('email', '==', email)).valueChanges();
+    }
+  }
+
+  addNewContent(){
+    
+  }
 }
