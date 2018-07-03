@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage'
 import { FirebaseService } from '../../services/firebase.service';
 import { SmartContractService } from '../../services/smart-contract.service'
 import { User } from '../../models/user'
+import { Asset } from '../../models/asset'
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { finalize } from 'rxjs/operators';
+
+declare let require: any;
+var sha256 = require('js-sha256').sha256;
 
 declare var M: any;
 
@@ -20,39 +25,68 @@ export class FileUploadComponent implements OnInit {
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
   uploadProgress: Observable<number>;
-  downloadURL: Observable<any>;
 
   uploadState: Observable<string>;
   fileNameId: string
 
-  userToDealWithEmail: string;
+
+  finalizeDeal: boolean = false
+  currentUserAccountAddress: any = "Not reachable";
+  downloadURL: string;
+
+
   userTodealWith: User[];
   userToDealStep3: User;
-  currentUserAccountAddress: any = "Not reachable";
   currentUserInfo: User[];
 
-  constructor(private afStorage: AngularFireStorage, private fireService: FirebaseService, private contractServices : SmartContractService) { }
+  userPercentage: number;
+  expertPercentage: number;
+  userToDealWithAddress: string;
+  videoHashsha256: string;
+  userToDealWithEmail: string;
+
+  asset: Asset = {
+    assetURL: '',
+    assetSha256Hash: '',
+    expertAddress: '',
+    expertPercentage: null,
+    userAddress: '',
+    userPercentage: null,
+    price: null,
+    currency: '',
+    assetDescription : ''
+  }
+
+  constructor(private router: Router, private afStorage: AngularFireStorage, private fireService: FirebaseService, private contractServices: SmartContractService) { }
 
   ngOnInit() {
+    let selectInputOptions = {}
+    var selectInputElems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(selectInputElems, selectInputOptions);
   }
 
   upload(event) {
-
     const id: string = new Date().getTime().toString();
     this.fileNameId = `assets/${id}_${event.target.files[0].name}`
     this.ref = this.afStorage.ref(this.fileNameId);
     this.task = this.ref.put(event.target.files[0])
+    this.videoHashsha256 = sha256(this.fileNameId);
 
     //Para el porcentaje del progreso del upload
     this.uploadProgress = this.task.percentageChanges();
     this.task.snapshotChanges().pipe(
       finalize(() => {
-        this.showAgreementSection();
+        let fileNameIdToDownload = this.afStorage.ref(`assets/${id}_${event.target.files[0].name}`);
+        fileNameIdToDownload.getDownloadURL().subscribe(url => {
+          this.downloadURL = url
+        })
+        this.finalizeDeal = true;
       })).subscribe()
+    this.showAgreementSection();
     ///UploadState
     this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
   }
-  //////This functions hides the loading sectionand shows the section where two people agree in a deal
+  //////This functions hides the loading section and shows the section where two people agree in a deal
   showAgreementSection() {
     let sectionOne = document.getElementById('setDealStepOne')
     sectionOne.classList.add('hide')
@@ -102,12 +136,34 @@ export class FileUploadComponent implements OnInit {
         this.fireService.getUserAddress(account)
         this.fireService.getUserInfo().subscribe(queriedItems => {
           this.currentUserInfo = queriedItems;
-          //console.log(this.userInfo)
         });
       });
 
-
+    this.userToDealWithAddress = userToDealStep3['address']
     this.userToDealStep3 = userToDealStep3
-    console.log(userToDealStep3)
+
+  }
+
+
+
+  sendAssetToDB() {
+    this.asset.assetURL = this.downloadURL;
+    this.asset.assetSha256Hash = this.videoHashsha256;
+    this.asset.expertAddress = this.currentUserAccountAddress
+    this.asset.userAddress = this.userToDealWithAddress;
+    this.asset.userPercentage = this.userPercentage;
+    this.asset.expertPercentage = this.expertPercentage;
+
+    if (this.asset.price == null) {
+      M.toast({ html: "Please assign a price to the content" })
+    } else if (this.asset.expertPercentage == undefined || this.asset.userPercentage == undefined) {
+      M.toast({ html: "Please assign a percentage" })
+    } else if (this.asset.currency == null) {
+      M.toast({ html: "Please select a currency" })
+    } else {
+      this.fireService.addNewContent(this.asset)
+      M.toast({ html: "Se ha registrado el contrato exitosamente" })
+      this.router.navigate(['/user'])
+    }
   }
 }

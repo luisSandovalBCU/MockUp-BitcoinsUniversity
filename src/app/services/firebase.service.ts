@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import { Asset } from '../models/asset'
 import 'rxjs/add/observable/combineLatest';
 
 
 @Injectable()
 export class FirebaseService {
   users: Observable<any[]>;
+  videos : Observable<any[]>;
   UserAddress : string;
 
 
@@ -27,6 +29,9 @@ export class FirebaseService {
     }
   }
 
+  getContent(){
+    return this.videos = this.db.collection('Assets').valueChanges();
+  }
 
   addNewUser(user: User){
     const usersColection = this.db.collection<User>('Users');
@@ -39,7 +44,8 @@ export class FirebaseService {
     }
   }
 
-  addNewContent(){
-    
+  addNewContent(asset : Asset){
+    const assetCollection = this.db.collection<Asset>('Assets');
+    assetCollection.add(asset);
   }
 }

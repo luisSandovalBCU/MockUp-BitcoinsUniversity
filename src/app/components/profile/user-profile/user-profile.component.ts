@@ -18,8 +18,6 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     let parallaxUserCover = document.getElementById('parallaxUserCover') as HTMLImageElement;
-
-
     ///******************************/
     ///Solidity
     if (this.contractServices.cryptoUser != false) {

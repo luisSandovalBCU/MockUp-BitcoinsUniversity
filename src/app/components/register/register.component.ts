@@ -3,9 +3,6 @@ import { Router } from '@angular/router';
 import { SmartContractService } from '../../services/smart-contract.service';
 import { User } from '../../models/user'
 import { FirebaseService } from '../../services/firebase.service'
-
-declare let require: any;
-var sha256 = require('js-sha256').sha256;
 declare var M: any;
 @Component({
   selector: 'app-register',

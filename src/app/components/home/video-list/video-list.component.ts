@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../../../services/firebase.service'
+import { Observable } from 'rxjs/Observable'
+import { Asset } from '../../../models/asset'
 
-declare var M:any;
+declare var M: any;
 
 @Component({
   selector: 'app-video-list',
@@ -9,14 +12,21 @@ declare var M:any;
   styleUrls: []
 })
 export class VideoListComponent implements OnInit {
-  
-  modalInstances:any;
-  modalInstanceEdit:any;
-  VideoPriceToSell : any = 0.04;
-  showDescription : boolean = false;
-  constructor(private router: Router) { }
+
+  modalInstances: any;
+  modalInstanceEdit: any;
+  VideoPriceToSell: any = 0.04;
+  showDescription: boolean = false;
+  constructor(private router: Router, private fireStore: FirebaseService) { }
+
+  asset : Observable<any[]>;
 
   ngOnInit() {
+
+    this.fireStore.getContent().subscribe(data => {
+      this.asset =  data
+    });
+
     let modalOption = new Object();
     let modalElems = document.querySelectorAll('.modal');
     this.modalInstances = M.Modal.init(modalElems, modalOption);
@@ -24,8 +34,8 @@ export class VideoListComponent implements OnInit {
 
     let previewVideo = document.getElementById('previewVideo') as HTMLVideoElement;
 
-    previewVideo.onplay = function() {
-      setTimeout(()=>{
+    previewVideo.onplay = function () {
+      setTimeout(() => {
         previewVideo.pause();
         previewVideo.currentTime = 0;
         previewVideo.load();
@@ -33,7 +43,7 @@ export class VideoListComponent implements OnInit {
     };
   }
 
-  BuyVideo(){
-      this.router.navigate(['video'])
+  BuyVideo() {
+    this.router.navigate(['/video'])
   }
 }
