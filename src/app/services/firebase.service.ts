@@ -3,17 +3,21 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Asset } from '../models/asset'
+import { CreatedAsset } from '../models/created-asset';
+import { AcquiredAssets } from '../models/acquired-assets'
 import 'rxjs/add/observable/combineLatest';
 
 
 @Injectable()
 export class FirebaseService {
   users: Observable<any[]>;
+  assets: Observable<any[]>;
   videos : Observable<any[]>;
   UserAddress : string;
 
 
-  //para agregar un nuevo elemento
+
+
   constructor(public db: AngularFirestore) {
     db.firestore.settings({ timestampsInSnapshots: true });
   }
@@ -30,7 +34,7 @@ export class FirebaseService {
   }
 
   getContent(){
-    return this.videos = this.db.collection('Assets').valueChanges();
+    return this.videos = this.db.collection<Asset>('Assets').valueChanges();
   }
 
   addNewUser(user: User){
@@ -47,5 +51,22 @@ export class FirebaseService {
   addNewContent(asset : Asset){
     const assetCollection = this.db.collection<Asset>('Assets');
     assetCollection.add(asset);
+  }
+
+  findAsset(sha256Hash : string){
+    if(sha256Hash){
+      return this.assets = this.db.collection<Asset>('Assets', ref => ref.where('assetSha256Hash', '==', sha256Hash)).valueChanges();
+    }
+  }
+
+  registerCreation(createdAsset: CreatedAsset){
+    const creationCollection = this.db.collection<CreatedAsset>('createdAsset');
+    creationCollection.add(createdAsset);
+  }
+
+
+  registerNewSell(acquiredAssets: AcquiredAssets){
+    const boughtAssetsCollection = this.db.collection<AcquiredAssets>('acquiredAssets');
+    boughtAssetsCollection.add(acquiredAssets)
   }
 }
