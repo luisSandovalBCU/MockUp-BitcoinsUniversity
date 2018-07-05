@@ -189,9 +189,9 @@ export class FileUploadComponent implements OnInit {
     //////crear registro de asset
     this.createdAsset.title = this.asset.title;
     this.createdAsset.assetSha256Hash = this.videoHashsha256
-    this.createdAsset.expertAddress = this.currentUserAccountAddress
-    this.createdAsset.userAddress = this.userToDealWithAddress;
-    this.createdAsset.dateCreated = this.fileTimeStamp;
+    this.createdAsset.expertAddress   = this.currentUserAccountAddress
+    this.createdAsset.userAddress     = this.userToDealWithAddress;
+    this.createdAsset.dateCreated     = this.fileTimeStamp;
 
 
     if (this.asset.price == null) {
@@ -201,10 +201,9 @@ export class FileUploadComponent implements OnInit {
     } else if (this.asset.currency == null) {
       M.toast({ html: "Please select a currency" })
     } else {
-      this.fireService.addNewContent(this.asset)
-      this.fireService.registerCreation(this.createdAsset)
-      M.toast({ html: "Se ha registrado el contrato exitosamente" })
-      this.router.navigate(['/user'])
+      this.contractServices.setDeal(this.asset, this.createdAsset)
+      
+
     }
   }
 }

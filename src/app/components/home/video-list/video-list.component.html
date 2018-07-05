@@ -62,9 +62,9 @@
 
     <div class="col s12 m6 valign-wrapper " style="height:80vh; display: flex; justify-content: center; align-items: middle; flex-direction: column;">
       <h2 class="white-text"> {{ assetsSelectedToView.price }} {{  assetsSelectedToView.currency  }}  </h2>
-      <!-- <h1 class="white-text"> {{ VideoPriceToSell | currency : "eth "}}</h1> -->
+      
       <br>
-      <!-- <a class="modal-close waves-effect waves-green btn" (click)="BuyVideo()">Buy</a> -->
+      
       <button class="btn modal-close" (click)="BuyVideo(assetsSelectedToView.assetSha256Hash);"> Buy</button>
     </div>
   </div>

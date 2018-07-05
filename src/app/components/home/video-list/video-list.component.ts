@@ -75,7 +75,7 @@ export class VideoListComponent implements OnInit {
     instance.open();
     
     //////***************************** */
-    ///// disable the video
+    ///// disable the video at 11th second
     //////***************************** */
     setTimeout(function(){
       let previewVideo = document.getElementById('previewVideo') as HTMLVideoElement;
@@ -84,7 +84,7 @@ export class VideoListComponent implements OnInit {
           previewVideo.pause();
           previewVideo.currentTime = 0;
           previewVideo.load();
-        }, 6000);
+        }, 11000);
       };
     }, 1000)
     
@@ -95,6 +95,10 @@ export class VideoListComponent implements OnInit {
     this.acquiredAssets.assetSha256Hash = acquiredAssetSha256Hash;
     this.acquiredAssets.buyerAddress = this.userAccountAddress;
     this.acquiredAssets.dateAcquired = currentDate
+
+    this.contractServices.setSale(this.acquiredAssets);
+
+
 
     this.fireStore.registerNewSell(this.acquiredAssets)
   }
