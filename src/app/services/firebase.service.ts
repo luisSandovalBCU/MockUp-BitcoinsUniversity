@@ -6,6 +6,7 @@ import { Asset } from '../models/asset'
 import { CreatedAsset } from '../models/created-asset';
 import { AcquiredAssets } from '../models/acquired-assets'
 import 'rxjs/add/observable/combineLatest';
+import { TwitterAuthProvider_Instance } from '@firebase/auth-types';
 
 
 @Injectable()
@@ -13,6 +14,7 @@ export class FirebaseService {
   users: Observable<any[]>;
   assets: Observable<any[]>;
   videos : Observable<any[]>;
+  acquiredAssets: Observable<AcquiredAssets[]>;
   UserAddress : string;
 
 
@@ -68,5 +70,11 @@ export class FirebaseService {
   registerNewSell(acquiredAssets: AcquiredAssets){
     const boughtAssetsCollection = this.db.collection<AcquiredAssets>('acquiredAssets');
     boughtAssetsCollection.add(acquiredAssets)
+  }
+
+  myAcquiredAssets(currentUserAddress: string){
+    if(currentUserAddress){
+      return this.acquiredAssets = this.db.collection<AcquiredAssets>('acquiredAssets', ref => ref.where('buyerAddress', "==", currentUserAddress)).valueChanges();
+    }
   }
 }

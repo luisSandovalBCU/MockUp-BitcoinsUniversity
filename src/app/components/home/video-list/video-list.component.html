@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col s12 m6 l4" *ngFor="let asset of assetsListShowCase">
 
-      <div class="card round-corner-20px hoverable">
+      <div class="card round-corner-20px hoverable"  (click)="selectAssetToView(asset.assetSha256Hash)">
         <div class="card-image" *ngIf="asset.documentType == 'mp4'">
           <video class="responsive-video round-corner-top-20px" width="320" height="240">
             <source [src]="asset.assetURL" type="video/mp4">
@@ -14,7 +14,7 @@
         <div class="card-content round-corner-20px">
           <span class="card-title activator grey-text">
             {{ asset.title }}
-            <a href="#modalVideoDescription" class=" modal-trigger" (click)="selectAssetToView(asset.assetSha256Hash)">
+            <a href="#modalVideoDescription" class=" modal-trigger">
               <i class="material-icons right">info</i>
             </a>
           </span>

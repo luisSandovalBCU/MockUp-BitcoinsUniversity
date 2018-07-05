@@ -100,6 +100,10 @@ export class SmartContractService {
     this.instance.setSale(acquiredAssets.assetSha256Hash, (err, data) => {
       if (!err) {
         this.fireService.registerNewSell(acquiredAssets)
+        M.toast({html: 'THe content was succesfully acquired.'})
+        // this.router.navigate(['/video'], acquiredAssets.assetSha256Hash)
+      }else{
+        M.toast({html: "En error ocurred, please try again." })
       }
     });
   }
@@ -110,7 +114,7 @@ export class SmartContractService {
       if (!err) {
           this.fireService.addNewContent(a)
           this.fireService.registerCreation(createdAsset)
-          M.toast({ html: "Se ha registrado el contrato exitosamente" })
+          M.toast({ html: "The contract was registered succesfully" })
           this.router.navigate(['/user'])
         }else{
           M.toast({ html: "En error ocurred, please try again." })

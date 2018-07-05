@@ -21,25 +21,25 @@ export class VideoListComponent implements OnInit {
   showDescription: boolean = false;
   userAccountAddress
 
-  acquiredAssets : AcquiredAssets = {
-    assetSha256Hash : '',
-    buyerAddress    : '',
-    dateAcquired    : ''
+  acquiredAssets: AcquiredAssets = {
+    assetSha256Hash: '',
+    buyerAddress: '',
+    dateAcquired: ''
   }
 
 
-  constructor(private router: Router, private fireStore: FirebaseService, private contractServices :SmartContractService) {
+  constructor(private router: Router, private fireStore: FirebaseService, private contractServices: SmartContractService) {
     ///******************************/
     ///Solidity
     if (this.contractServices.cryptoUser != false) {
       this.contractServices.getUserAccount()
         .then(account => {
-          this.userAccountAddress =  account;
+          this.userAccountAddress = account;
         });
     }
   }
 
-  assetsListShowCase : Asset[];
+  assetsListShowCase: Asset[];
   AcquiredAssets: any;
   assetsSelectedToView: any;
 
@@ -57,41 +57,67 @@ export class VideoListComponent implements OnInit {
 
 
 
-  selectAssetToView(sha256Hash : string){
-    this.assetsSelectedToView = '';
-    this.fireStore.findAsset(sha256Hash).subscribe(data => {
-      data.forEach(data1 => {
-        this.assetsSelectedToView = data1;
-      })
+  selectAssetToView(sha256Hash: string) {
+
+    this.fireStore.myAcquiredAssets(this.userAccountAddress).subscribe(data => {
+      console.log(data.length)
+
+      if (data.length != 0) {
+
+
+        data.forEach(video => {
+
+          if (video.assetSha256Hash == sha256Hash) {
+            this.router.navigate(['/video'])
+          } else {
+            this.showVIdeoInformation(sha256Hash)
+          }
+
+        })
+
+      } else {
+
+        this.showVIdeoInformation(sha256Hash)
+      }
     });
-
-
-    
-    //////***************************** */
-    ////// Open a modal with information 
-    //////***************************** */
-    let modalViewContentSelectedElement = document.querySelector('#modalVideoDescription')
-    var instance = M.Modal.getInstance(modalViewContentSelectedElement);
-    instance.open();
-    
-    //////***************************** */
-    ///// disable the video at 11th second
-    //////***************************** */
-    setTimeout(function(){
-      let previewVideo = document.getElementById('previewVideo') as HTMLVideoElement;
-      previewVideo.onplay = function () {
-        setTimeout(() => {
-          previewVideo.pause();
-          previewVideo.currentTime = 0;
-          previewVideo.load();
-        }, 11000);
-      };
-    }, 1000)
-    
   }
 
-  BuyVideo(acquiredAssetSha256Hash : string) {
-    let currentDate  = new Date().getTime().toString();
+  showVIdeoInformation(sha256Hash: string) {
+
+        ////get the videos information
+        this.assetsSelectedToView = '';
+        this.fireStore.findAsset(sha256Hash).subscribe(data => {
+          data.forEach(data1 => {
+            this.assetsSelectedToView = data1;
+          })
+        });
+
+
+
+        //////***************************** */
+        ////// Open a modal with information 
+        //////***************************** */
+        let modalViewContentSelectedElement = document.querySelector('#modalVideoDescription')
+        var instance = M.Modal.getInstance(modalViewContentSelectedElement);
+        instance.open();
+
+        //////***************************** */
+        ///// disable the video at 11th second
+        //////***************************** */
+        setTimeout(function () {
+          let previewVideo = document.getElementById('previewVideo') as HTMLVideoElement;
+          previewVideo.onplay = function () {
+            setTimeout(() => {
+              previewVideo.pause();
+              previewVideo.currentTime = 0;
+              previewVideo.load();
+            }, 11000);
+          };
+        }, 1000)
+  }
+
+  BuyVideo(acquiredAssetSha256Hash: string) {
+    let currentDate = new Date().getTime().toString();
     this.acquiredAssets.assetSha256Hash = acquiredAssetSha256Hash;
     this.acquiredAssets.buyerAddress = this.userAccountAddress;
     this.acquiredAssets.dateAcquired = currentDate
