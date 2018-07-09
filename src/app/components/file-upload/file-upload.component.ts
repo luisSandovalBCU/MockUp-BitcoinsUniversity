@@ -201,6 +201,9 @@ export class FileUploadComponent implements OnInit {
     } else if (this.asset.currency == null) {
       M.toast({ html: "Please select a currency" })
     } else {
+
+      //this.contractServices
+
       this.contractServices.setDeal(this.asset, this.createdAsset)
       
 

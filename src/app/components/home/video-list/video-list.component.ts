@@ -60,23 +60,18 @@ export class VideoListComponent implements OnInit {
   selectAssetToView(sha256Hash: string) {
 
     this.fireStore.myAcquiredAssets(this.userAccountAddress).subscribe(data => {
-      console.log(data.length)
-
+      // console.log(data.length)
       if (data.length != 0) {
-
-
         data.forEach(video => {
-
           if (video.assetSha256Hash == sha256Hash) {
-            this.router.navigate(['/video'])
+
+            this.router.navigate(['/video', sha256Hash])
+            //this.router.navigate(['/video'])
           } else {
             this.showVIdeoInformation(sha256Hash)
           }
-
         })
-
       } else {
-
         this.showVIdeoInformation(sha256Hash)
       }
     });
@@ -84,36 +79,34 @@ export class VideoListComponent implements OnInit {
 
   showVIdeoInformation(sha256Hash: string) {
 
-        ////get the videos information
-        this.assetsSelectedToView = '';
-        this.fireStore.findAsset(sha256Hash).subscribe(data => {
-          data.forEach(data1 => {
-            this.assetsSelectedToView = data1;
-          })
-        });
+    ////get the videos information
+    this.assetsSelectedToView = '';
+    this.fireStore.findAsset(sha256Hash).subscribe(data => {
+      data.forEach(data1 => {
+        this.assetsSelectedToView = data1;
+      })
+    });
 
+    //////***************************** */
+    ////// Open a modal with information 
+    //////***************************** */
+    let modalViewContentSelectedElement = document.querySelector('#modalVideoDescription')
+    var instance = M.Modal.getInstance(modalViewContentSelectedElement);
+    instance.open();
 
-
-        //////***************************** */
-        ////// Open a modal with information 
-        //////***************************** */
-        let modalViewContentSelectedElement = document.querySelector('#modalVideoDescription')
-        var instance = M.Modal.getInstance(modalViewContentSelectedElement);
-        instance.open();
-
-        //////***************************** */
-        ///// disable the video at 11th second
-        //////***************************** */
-        setTimeout(function () {
-          let previewVideo = document.getElementById('previewVideo') as HTMLVideoElement;
-          previewVideo.onplay = function () {
-            setTimeout(() => {
-              previewVideo.pause();
-              previewVideo.currentTime = 0;
-              previewVideo.load();
-            }, 11000);
-          };
-        }, 1000)
+    //////***************************** */
+    ///// disable the video at 11th second
+    //////***************************** */
+    setTimeout(function () {
+      let previewVideo = document.getElementById('previewVideo') as HTMLVideoElement;
+      previewVideo.onplay = function () {
+        setTimeout(() => {
+          previewVideo.pause();
+          previewVideo.currentTime = 0;
+          previewVideo.load();
+        }, 11000);
+      };
+    }, 1000)
   }
 
   BuyVideo(acquiredAssetSha256Hash: string) {
@@ -121,11 +114,7 @@ export class VideoListComponent implements OnInit {
     this.acquiredAssets.assetSha256Hash = acquiredAssetSha256Hash;
     this.acquiredAssets.buyerAddress = this.userAccountAddress;
     this.acquiredAssets.dateAcquired = currentDate
-
     this.contractServices.setSale(this.acquiredAssets);
-
-
-
     this.fireStore.registerNewSell(this.acquiredAssets)
   }
 }

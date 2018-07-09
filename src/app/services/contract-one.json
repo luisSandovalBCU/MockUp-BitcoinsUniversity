@@ -47,15 +47,6 @@
 		"type": "event"
 	},
 	{
-		"constant": false,
-		"inputs": [],
-		"name": "Payable",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -97,6 +88,23 @@
 		"inputs": [
 			{
 				"indexed": false,
+				"name": "uRole",
+				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"name": "uName",
+				"type": "bytes16"
+			}
+		],
+		"name": "NewUser",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
 				"name": "aHash",
 				"type": "bytes32"
 			},
@@ -120,21 +128,13 @@
 		"type": "event"
 	},
 	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "uRole",
-				"type": "uint8"
-			},
-			{
-				"indexed": false,
-				"name": "uName",
-				"type": "bytes16"
-			}
-		],
-		"name": "NewUser",
-		"type": "event"
+		"constant": false,
+		"inputs": [],
+		"name": "Payable",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
 	},
 	{
 		"constant": false,
@@ -230,8 +230,8 @@
 	},
 	{
 		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
+		"payable": true,
+		"stateMutability": "payable",
 		"type": "constructor"
 	},
 	{

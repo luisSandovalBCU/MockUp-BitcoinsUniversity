@@ -20,7 +20,7 @@ export class SmartContractService {
   public userAccountAddress: Promise<string> = null;
 
   private web3: any;
-  private _tokenContractAddress = '0x6e0bec7cd4c786919329dc1025c4cf8cf951bbd2';
+  private _tokenContractAddress = '0x29040bfdaa53df4b22786333d10b9290415ec62e';
   private instance: any;
 
   constructor(private router: Router, private fireService: FirebaseService) {
@@ -84,40 +84,45 @@ export class SmartContractService {
   setUser(user: User) {
     let FullName = `${user.name} ${user.lastname}`
     this.instance.setUser(user.role, FullName, (err, res) => {
-      if (!err) {
-        console.log(`Success with${res}`);
+      if (res) {
+        M.toast({html: `Succesful`})
 
         /////Registro en firebase
         this.fireService.addNewUser(user);
 
       } else {
-        console.log(`Failed with ${err}`);
+        M.toast({html:`Error: ${err}`})
       }
     })
   }
 
   setSale(acquiredAssets: AcquiredAssets) {
-    this.instance.setSale(acquiredAssets.assetSha256Hash, (err, data) => {
-      if (!err) {
+    this.instance.setSale(acquiredAssets.assetSha256Hash, (err, res) => {
+      if (res) {
         this.fireService.registerNewSell(acquiredAssets)
-        M.toast({html: 'THe content was succesfully acquired.'})
+        M.toast({html:`Succesful`})
         // this.router.navigate(['/video'], acquiredAssets.assetSha256Hash)
       }else{
-        M.toast({html: "En error ocurred, please try again." })
+        M.toast({html:`Error: ${err}`})
       }
     });
   }
 
+  setAsset(){
+    this.instance.setAsset();
+  }
+
 
   setDeal(a: Asset, createdAsset: CreatedAsset) {
-    this.instance.setDeal(a.assetSha256Hash, a.price, a.expertAddress, a.expertPercentage, a.userAddress, a.userPercentage, (err, res) => {
-      if (!err) {
+    
+    this.instance.setDeal(a.assetSha256Hash, a.expertAddress, a.userAddress, a.expertPercentage, a.userPercentage, a.price,(err, res) => {
+      if (res) {
           this.fireService.addNewContent(a)
           this.fireService.registerCreation(createdAsset)
-          M.toast({ html: "The contract was registered succesfully" })
+          M.toast({ html: `Succesful`})
           this.router.navigate(['/user'])
         }else{
-          M.toast({ html: "En error ocurred, please try again." })
+          M.toast({ html:`Error: ${err}` })
         }
     });
   }
@@ -125,5 +130,6 @@ export class SmartContractService {
   watchUsers() {
     console.log(this.instance.watchUsers());
   }
+
 }
 
